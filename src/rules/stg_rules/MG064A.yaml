@@ -1,0 +1,129 @@
+# STG Rules: MG064A – General Medical Inpatient (Comprehensive)
+# NHA PMJAY Package | Medical – General Medicine / Complex Medical Management
+
+package_code: MG064A
+package_name: "General Medical Inpatient - Comprehensive Management"
+specialty: "General Medicine / Internal Medicine"
+care_type: "Inpatient"
+min_los: 3
+max_los: 14
+
+required_documents:
+  - discharge_summary
+  - case_sheet
+  - lab_investigation
+  - identity_document
+  - preauthorization_form
+
+recommended_documents:
+  - clinical_notes           # Daily doctor notes / progress records
+  - medication_chart         # Treatment/medication chart
+  - usg_report               # USG if indicated
+  - xray_image               # Chest X-ray
+  - feedback_form
+  - bill_invoice
+  - consent_form
+
+not_required_documents:
+  - angiography_report
+  - operative_notes
+  - barcode_sticker
+  - ivp_report
+
+rules:
+  - id: R001
+    name: "Discharge summary present"
+    type: document_presence
+    required_doc: discharge_summary
+    severity: critical
+    message: "Discharge summary is mandatory for all inpatient claims."
+
+  - id: R002
+    name: "Pre-authorization form present"
+    type: document_presence
+    required_doc: preauthorization_form
+    severity: critical
+    message: "Pre-authorization/PMJAY eligibility form is mandatory."
+
+  - id: R003
+    name: "Case sheet present"
+    type: document_presence
+    required_doc: case_sheet
+    severity: critical
+    message: "Case sheet documenting clinical history and daily progress is mandatory."
+
+  - id: R004
+    name: "Identity document required"
+    type: document_presence
+    required_doc: identity_document
+    severity: critical
+    message: "Beneficiary identity proof (Aadhar/PMJAY card) must be submitted."
+
+  - id: R005
+    name: "Laboratory investigations documented"
+    type: document_presence
+    required_doc: lab_investigation
+    severity: major
+    message: "Lab reports (CBC, biochemistry, etc.) required for comprehensive medical management."
+
+  - id: R006
+    name: "Admission date must precede discharge date"
+    type: temporal
+    check: admission_before_discharge
+    severity: critical
+    message: "Admission date must be before or equal to discharge date."
+
+  - id: R007
+    name: "Minimum inpatient stay 3 days"
+    type: los
+    min_days: 3
+    max_days: 14
+    severity: major
+    message: "Comprehensive medical management requires minimum 3-day inpatient stay."
+
+  - id: R008
+    name: "Hospital stamp on discharge summary"
+    type: visual_element
+    required_on: discharge_summary
+    element: hospital_stamp
+    severity: major
+    message: "Discharge summary must carry the hospital stamp."
+
+  - id: R009
+    name: "Doctor signature on discharge summary"
+    type: visual_element
+    required_on: discharge_summary
+    element: doctor_signature
+    severity: major
+    message: "Treating doctor's signature required on discharge summary."
+
+  - id: R010
+    name: "Billed amount must not exceed package ceiling"
+    type: financial
+    max_amount: 30000
+    severity: minor
+    message: "MG064A package ceiling applies. Excess requires documentary evidence."
+
+  - id: R011
+    name: "Diagnosis consistent with complex medical management"
+    type: diagnosis_keyword
+    keywords: ["fever", "sepsis", "infection", "pneumonia", "typhoid", "dengue",
+               "malaria", "asthma", "copd", "heart failure", "cardiac",
+               "anemia", "diabetes", "hypertension", "stroke", "seizure",
+               "renal failure", "liver disease", "hepatitis", "pancreatitis"]
+    severity: major
+    message: "Diagnosis must be consistent with complex medical management indication."
+
+  - id: R013
+    name: "Stent type documented in procedure report"
+    type: diagnosis_keyword
+    keywords: ["stent", "des", "bare metal", "drug eluting", "ptca", "balloon", "angioplasty"]
+    severity: major
+    message: "Procedure report must document stent type used."
+
+  - id: R014
+    name: "Pre-PTCA investigations present"
+    type: document_presence
+    required_doc: lab_investigation
+    severity: major
+    message: "Pre-procedure labs (CBC, RFT, PTINR, ECG) must be submitted."

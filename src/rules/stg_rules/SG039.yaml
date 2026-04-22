@@ -1,0 +1,96 @@
+# STG Rules: SG039 – Ultrasonography (USG) / Diagnostic Imaging
+# NHA PMJAY Package | Surgical/Diagnostic – Ultrasound Imaging
+
+package_code: SG039
+package_name: "Ultrasonography (USG) – Whole Abdomen / Pelvis / Targeted"
+specialty: "Radiology / Diagnostics"
+care_type: "Outpatient / Day Procedure"
+min_los: 0
+max_los: 1
+
+required_documents:
+  - usg_report               # USG film/image is the primary document
+  - identity_document
+  - preauthorization_form
+
+recommended_documents:
+  - lab_investigation        # Radiologist/sonologist report
+  - discharge_summary        # If admitted
+  - clinical_notes
+  - bill_invoice
+  - feedback_form
+
+not_required_documents:
+  - angiography_report
+  - operative_notes
+  - barcode_sticker
+  - ivp_report
+  - xray_image
+
+rules:
+  - id: R001
+    name: "USG image or report present"
+    type: document_presence
+    required_doc: usg_report
+    severity: critical
+    message: "USG film/report is the primary mandatory document for SG039."
+
+  - id: R002
+    name: "Pre-authorization form present"
+    type: document_presence
+    required_doc: preauthorization_form
+    severity: critical
+    message: "Pre-authorization is mandatory."
+
+  - id: R003
+    name: "Identity document required"
+    type: document_presence
+    required_doc: identity_document
+    severity: critical
+    message: "Beneficiary identity proof must be submitted."
+
+  - id: R004
+    name: "Sonologist report / interpretation present"
+    type: document_presence
+    required_doc: lab_investigation
+    severity: major
+    message: "Sonologist's written report interpreting the USG should be present."
+
+  - id: R005
+    name: "USG date within claim period"
+    type: temporal
+    check: admission_before_discharge
+    severity: major
+    message: "USG date must fall within the claimed service period."
+
+  - id: R006
+    name: "Sonologist signature on report"
+    type: visual_element
+    required_on: usg_report
+    element: doctor_signature
+    severity: major
+    message: "Sonologist/radiologist signature required on USG report."
+
+  - id: R007
+    name: "Hospital stamp on USG report"
+    type: visual_element
+    required_on: usg_report
+    element: hospital_stamp
+    severity: minor
+    message: "Hospital/radiology center stamp required on USG report."
+
+  - id: R008
+    name: "Billed amount within USG procedure ceiling"
+    type: financial
+    max_amount: 3000
+    severity: minor
+    message: "SG039 USG package ceiling applies."
+
+  - id: R009
+    name: "Diagnosis consistent with USG indication"
+    type: diagnosis_keyword
+    keywords: ["usg", "ultrasound", "sonography", "abdomen", "pelvis", "liver",
+               "gallbladder", "gallstone", "kidney", "renal", "uterus", "ovarian",
+               "cyst", "calculus", "ascites", "mass", "lesion"]
+    severity: minor
+    message: "Clinical indication should support the USG investigation."

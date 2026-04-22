@@ -1,0 +1,138 @@
+# STG Rules: SB039A – Total Knee Replacement (TKR) / Hip Arthroplasty
+# NHA PMJAY Package | Surgical – Bone / Orthopaedics
+
+package_code: SB039A
+package_name: "Total Knee / Hip Arthroplasty"
+specialty: "Orthopaedics"
+care_type: "Inpatient"
+min_los: 5
+max_los: 14
+
+required_documents:
+  - discharge_summary
+  - case_sheet
+  - operative_notes
+  - xray_image               # Pre-op and post-op X-rays
+  - barcode_sticker          # Implant sticker (MANDATORY for arthroplasty)
+  - identity_document
+  - preauthorization_form
+  - anesthesia_notes
+  - lab_investigation
+
+recommended_documents:
+  - clinical_notes
+  - nursing_notes
+  - medication_chart
+  - bill_invoice
+  - feedback_form
+  - consent_form
+  - radiology_report
+
+not_required_documents:
+  - angiography_report
+  - procedure_report         # Not a cardiac procedure
+  - ivp_report
+
+rules:
+  - id: R001
+    name: "Discharge summary present"
+    type: document_presence
+    required_doc: discharge_summary
+    severity: critical
+    message: "Discharge summary is mandatory."
+
+  - id: R002
+    name: "Pre-authorization form present"
+    type: document_presence
+    required_doc: preauthorization_form
+    severity: critical
+    message: "Pre-authorization form is mandatory."
+
+  - id: R003
+    name: "Operative notes present"
+    type: document_presence
+    required_doc: operative_notes
+    severity: critical
+    message: "Operative notes are mandatory for surgical packages."
+
+  - id: R004
+    name: "X-ray (pre-op) must be present"
+    type: document_presence
+    required_doc: xray_image
+    severity: critical
+    message: "Pre-operative X-ray of the affected joint is mandatory."
+
+  - id: R005
+    name: "Implant barcode sticker present"
+    type: document_presence
+    required_doc: barcode_sticker
+    severity: critical
+    message: "Implant sticker (REF/LOT/SN) is mandatory for arthroplasty claims."
+
+  - id: R006
+    name: "Anaesthesia notes present"
+    type: document_presence
+    required_doc: anesthesia_notes
+    severity: major
+    message: "Anaesthesia record must be submitted for surgical claims."
+
+  - id: R007
+    name: "Pre-operative investigations present"
+    type: document_presence
+    required_doc: lab_investigation
+    severity: major
+    message: "Pre-op labs (CBC, BT/CT, RFT, ECG) must be submitted."
+
+  - id: R008
+    name: "Admission before discharge"
+    type: temporal
+    check: admission_before_discharge
+    severity: critical
+    message: "Admission date must precede discharge date."
+
+  - id: R009
+    name: "Procedure within admission–discharge window"
+    type: temporal
+    check: procedure_within_admission
+    severity: critical
+    message: "Operation date must be between admission and discharge."
+
+  - id: R010
+    name: "Length of stay 5–14 days"
+    type: los
+    min_days: 5
+    max_days: 14
+    severity: major
+    message: "Arthroplasty LoS < 5 days is clinically implausible; > 14 days needs justification."
+
+  - id: R011
+    name: "Hospital stamp on discharge summary"
+    type: visual_element
+    required_on: discharge_summary
+    element: hospital_stamp
+    severity: major
+    message: "Hospital stamp required on discharge summary."
+
+  - id: R012
+    name: "Doctor/Surgeon signature on operative notes"
+    type: visual_element
+    required_on: operative_notes
+    element: doctor_signature
+    severity: major
+    message: "Surgeon's signature required on operative notes."
+
+  - id: R013
+    name: "Diagnosis consistent with joint disease"
+    type: diagnosis_keyword
+    keywords: ["osteoarthritis", "avascular necrosis", "fracture neck", "knee replacement",
+               "hip replacement", "arthroplasty", "avn", "oa knee", "oa hip"]
+    severity: major
+    message: "Diagnosis must be consistent with joint replacement indication."
+
+  - id: R014
+    name: "Implant details documented"
+    type: diagnosis_keyword
+    keywords: ["implant", "prosthesis", "femoral component", "tibial component",
+               "acetabular cup", "stem", "cement"]
+    severity: major
+    message: "Operative notes must document implant components used."

@@ -1,0 +1,108 @@
+# STG Rules: MC011A – Coronary Angiography (CAG) ± PTCA with Stent
+# NHA PMJAY Package | Medical – Cardiac Catheterization / Interventional Cardiology
+
+package_code: MC011A
+package_name: "Coronary Angiography (CAG) with or without PTCA / Stenting"
+specialty: "Cardiology – Interventional"
+care_type: "Daycare / Short-stay Inpatient"
+min_los: 0
+max_los: 3
+
+required_documents:
+  - angiography_report       # CAG report is the primary deliverable
+  - identity_document
+  - preauthorization_form
+
+recommended_documents:
+  - discharge_summary
+  - case_sheet
+  - procedure_report         # PTCA report if stenting performed
+  - lab_investigation        # CBC, Creatinine, PTINR before contrast
+  - xray_image               # Chest X-ray
+  - clinical_notes
+  - bill_invoice
+  - feedback_form
+  - consent_form
+
+not_required_documents:
+  - operative_notes
+  - usg_report
+  - ivp_report
+  - barcode_sticker
+
+rules:
+  - id: R001
+    name: "Angiography report present"
+    type: document_presence
+    required_doc: angiography_report
+    severity: critical
+    message: "CAG report (Coronary Angiography report) is mandatory for MC011A."
+
+  - id: R002
+    name: "Pre-authorization form present"
+    type: document_presence
+    required_doc: preauthorization_form
+    severity: critical
+    message: "Pre-authorization is mandatory for cardiac catheterization."
+
+  - id: R003
+    name: "Discharge card / summary present"
+    type: document_presence
+    required_doc: discharge_summary
+    severity: major
+    message: "Discharge card / summary is expected for any cardiac procedure."
+
+  - id: R004
+    name: "Admission before discharge"
+    type: temporal
+    check: admission_before_discharge
+    severity: critical
+    message: "Admission date must precede discharge date."
+
+  - id: R005
+    name: "Length of stay within CAG/PTCA limits"
+    type: los
+    min_days: 0
+    max_days: 3
+    severity: major
+    message: "CAG is typically daycare; PTCA may require 1–3 days. LoS > 3 days requires justification."
+
+  - id: R006
+    name: "Hospital stamp on angiography report"
+    type: visual_element
+    required_on: angiography_report
+    element: hospital_stamp
+    severity: major
+    message: "Hospital/cath-lab stamp required on angiography report."
+
+  - id: R007
+    name: "Cardiologist signature on report"
+    type: visual_element
+    required_on: angiography_report
+    element: doctor_signature
+    severity: major
+    message: "Cardiologist signature required on CAG/PTCA report."
+
+  - id: R008
+    name: "Diagnosis indicates coronary artery disease or stenosis"
+    type: diagnosis_keyword
+    keywords: ["coronary", "cad", "stenosis", "angina", "ptca", "angioplasty",
+               "stent", "lad", "rca", "lcx", "left anterior descending",
+               "right coronary", "catheterization", "cath", "angiography"]
+    severity: critical
+    message: "Diagnosis must document coronary artery disease or stenos requiring angiography/PTCA."
+
+  - id: R009
+    name: "Stent/implant sticker present if PTCA performed"
+    type: document_presence_conditional
+    required_doc: barcode_sticker
+    condition_keywords: ["ptca", "stent", "angioplasty", "des", "drug eluting"]
+    severity: major
+    message: "If PTCA/stenting done, stent barcode sticker is required."
+
+  - id: R010
+    name: "Billed amount within CAG/PTCA package ceiling"
+    type: financial
+    max_amount: 25000
+    severity: minor
+    message: "MC011A package ceiling is approximately Rs 25,000 for CAG; PTCA has higher ceiling."

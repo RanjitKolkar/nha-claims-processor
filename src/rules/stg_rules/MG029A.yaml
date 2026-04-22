@@ -1,0 +1,96 @@
+# STG Rules: MG029A – Radiological Investigation (X-Ray / Chest Imaging)
+# NHA PMJAY Package | Medical – Diagnostic Radiology / X-Ray
+
+package_code: MG029A
+package_name: "Radiological Investigation – X-Ray / Chest Imaging"
+specialty: "Radiology / Diagnostic Imaging"
+care_type: "Outpatient / Day Procedure"
+min_los: 0
+max_los: 1
+
+required_documents:
+  - xray_image               # X-ray film / plate is the primary document
+  - identity_document
+  - preauthorization_form
+
+recommended_documents:
+  - lab_investigation        # Radiology report / interpretation
+  - discharge_summary        # If admitted
+  - clinical_notes
+  - bill_invoice
+  - feedback_form
+
+not_required_documents:
+  - angiography_report
+  - operative_notes
+  - barcode_sticker
+  - usg_report
+  - ivp_report
+
+rules:
+  - id: R001
+    name: "X-ray image or film present"
+    type: document_presence
+    required_doc: xray_image
+    severity: critical
+    message: "X-ray film/image is the primary mandatory document for MG029A."
+
+  - id: R002
+    name: "Pre-authorization form present"
+    type: document_presence
+    required_doc: preauthorization_form
+    severity: critical
+    message: "Pre-authorization is mandatory."
+
+  - id: R003
+    name: "Radiology report / interpretation present"
+    type: document_presence
+    required_doc: lab_investigation
+    severity: major
+    message: "Radiologist's report interpreting the X-ray should be present."
+
+  - id: R004
+    name: "Identity document required"
+    type: document_presence
+    required_doc: identity_document
+    severity: critical
+    message: "Beneficiary identity proof must be submitted."
+
+  - id: R005
+    name: "X-ray date within claim period"
+    type: temporal
+    check: admission_before_discharge
+    severity: major
+    message: "X-ray date must fall within the claimed service period."
+
+  - id: R006
+    name: "Radiologist / technician signature on report"
+    type: visual_element
+    required_on: xray_image
+    element: doctor_signature
+    severity: major
+    message: "Radiologist signature required on X-ray report."
+
+  - id: R007
+    name: "Hospital stamp on X-ray or report"
+    type: visual_element
+    required_on: xray_image
+    element: hospital_stamp
+    severity: minor
+    message: "Hospital/radiology center stamp required on X-ray film or report."
+
+  - id: R008
+    name: "Billed amount within radiology package ceiling"
+    type: financial
+    max_amount: 5000
+    severity: minor
+    message: "MG029A radiology package ceiling applies."
+
+  - id: R009
+    name: "Diagnosis consistent with chest/respiratory indication"
+    type: diagnosis_keyword
+    keywords: ["xray", "x-ray", "chest", "pneumonia", "tb", "tuberculosis",
+               "fracture", "cardiomegaly", "pleural", "lung", "rib", "cough",
+               "radiology", "radiograph", "film", "x ray"]
+    severity: minor
+    message: "Clinical indication should support the X-ray investigation."

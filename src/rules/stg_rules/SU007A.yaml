@@ -1,0 +1,131 @@
+# STG Rules: SU007A – Urological Surgery (PCNL / URS / DJ Stenting)
+# NHA PMJAY Package | Surgical – Urology
+
+package_code: SU007A
+package_name: "Percutaneous Nephrolithotomy (PCNL) / URS / DJ Stenting"
+specialty: "Urology"
+care_type: "Inpatient"
+min_los: 3
+max_los: 7
+
+required_documents:
+  - discharge_summary
+  - case_sheet
+  - operative_notes
+  - ivp_report               # IVP / KUB X-ray critical for stone disease
+  - usg_report               # USG KUB
+  - lab_investigation
+  - identity_document
+  - preauthorization_form
+  - anesthesia_notes
+
+recommended_documents:
+  - xray_image
+  - clinical_notes
+  - medication_chart
+  - bill_invoice
+  - feedback_form
+  - consent_form
+  - ct_mri_report            # CT KUB if available
+
+not_required_documents:
+  - angiography_report
+  - procedure_report
+  - barcode_sticker
+
+rules:
+  - id: R001
+    name: "Discharge summary present"
+    type: document_presence
+    required_doc: discharge_summary
+    severity: critical
+    message: "Discharge summary is mandatory."
+
+  - id: R002
+    name: "Pre-authorization form present"
+    type: document_presence
+    required_doc: preauthorization_form
+    severity: critical
+    message: "Pre-authorization is mandatory."
+
+  - id: R003
+    name: "Operative notes present"
+    type: document_presence
+    required_doc: operative_notes
+    severity: critical
+    message: "Operative notes are mandatory for urological surgical claims."
+
+  - id: R004
+    name: "IVP / KUB report present"
+    type: document_presence
+    required_doc: ivp_report
+    severity: critical
+    message: "IVP or KUB X-ray is mandatory to confirm urolithiasis / obstructive uropathy."
+
+  - id: R005
+    name: "USG KUB present"
+    type: document_presence
+    required_doc: usg_report
+    severity: major
+    message: "USG KUB is required to document stone size and location."
+
+  - id: R006
+    name: "Anaesthesia notes present"
+    type: document_presence
+    required_doc: anesthesia_notes
+    severity: major
+    message: "Anaesthesia record is mandatory."
+
+  - id: R007
+    name: "Pre-operative lab investigations present"
+    type: document_presence
+    required_doc: lab_investigation
+    severity: major
+    message: "Pre-op urine culture, RFT, CBC must be submitted."
+
+  - id: R008
+    name: "Admission before discharge"
+    type: temporal
+    check: admission_before_discharge
+    severity: critical
+    message: "Admission date must precede discharge date."
+
+  - id: R009
+    name: "Surgery date within admission window"
+    type: temporal
+    check: procedure_within_admission
+    severity: critical
+    message: "Operation date must be within admission–discharge window."
+
+  - id: R010
+    name: "Length of stay 3–7 days"
+    type: los
+    min_days: 3
+    max_days: 7
+    severity: major
+    message: "PCNL/URS LoS < 3 days is unusual; > 7 days needs justification."
+
+  - id: R011
+    name: "Hospital stamp on discharge summary"
+    type: visual_element
+    required_on: discharge_summary
+    element: hospital_stamp
+    severity: major
+    message: "Hospital stamp required on discharge summary."
+
+  - id: R012
+    name: "Surgeon signature on operative notes"
+    type: visual_element
+    required_on: operative_notes
+    element: doctor_signature
+    severity: major
+    message: "Urologist's signature required on operative notes."
+
+  - id: R013
+    name: "Diagnosis consistent with urolithiasis / obstructive uropathy"
+    type: diagnosis_keyword
+    keywords: ["calculus", "stone", "nephrolithiasis", "urolithiasis", "hydronephrosis",
+               "obstruction", "pcnl", "urs", "ureteroscopy", "dj stent",
+               "kidney stone", "ureteric"]
+    severity: major
+    message: "Diagnosis must confirm renal / ureteric calculus or obstructive uropathy."

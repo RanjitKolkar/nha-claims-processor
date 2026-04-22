@@ -1,0 +1,592 @@
+{
+  "meta": {
+    "generated_at": "2026-04-22T18:24:05.296848",
+    "system": "Medical Claims Processor v1.0"
+  },
+  "claim": {
+    "claim_id": "CMJAY_TR_CMJAY_2025_R3_1021740400",
+    "package_code": "SB039A",
+    "patient_name": "Es AgelGender",
+    "patient_id": "ILS7850769",
+    "age": null,
+    "gender": "Female",
+    "hospital_name": "s with above mentioned complaints for further management",
+    "doctor_name": null,
+    "admission_date": "2026-02-17",
+    "discharge_date": null,
+    "procedure_date": null,
+    "length_of_stay_days": null,
+    "billed_amount": null,
+    "diagnosis": [
+      "- Left OA knee",
+      "M17.12",
+      "Osteoarthritis Knee",
+      "Total Knee Arthroplasty",
+      "OA B/L KNEE",
+      "Final Diagnosis :"
+    ]
+  },
+  "decision": {
+    "claim_id": "CMJAY_TR_CMJAY_2025_R3_1021740400",
+    "package_code": "SB039A",
+    "verdict": "FAIL",
+    "overall_score": 0.5179,
+    "confidence": 0.7843,
+    "critical_failures": [
+      "[R002] Pre-authorization form is mandatory.",
+      "[R008] Cannot verify: admission or discharge date missing.",
+      "[R009] Procedure date not found in documents."
+    ],
+    "major_failures": [
+      "[R006] Anaesthesia record must be submitted for surgical claims.",
+      "[R007] Pre-op labs (CBC, BT/CT, RFT, ECG) must be submitted.",
+      "[R010] Length of stay cannot be computed (dates missing).",
+      "[R014] Operative notes must document implant components used."
+    ],
+    "minor_failures": [],
+    "passed_rules": [
+      "[R001] Discharge summary present",
+      "[R003] Operative notes present",
+      "[R004] X-ray (pre-op) must be present",
+      "[R005] Implant barcode sticker present",
+      "[R011] Hospital stamp on discharge summary",
+      "[R012] Doctor/Surgeon signature on operative notes",
+      "[R013] Diagnosis consistent with joint disease"
+    ],
+    "rule_details": [
+      {
+        "rule_id": "R001",
+        "rule_name": "Discharge summary present",
+        "result": "PASS",
+        "message": "discharge_summary found.",
+        "confidence": 0.92,
+        "evidence": [
+          {
+            "doc_id": "000524__CMJAY_TR_CMJAY_2025_R3_1021740400__DIS",
+            "page": 1,
+            "field": "document_type",
+            "value": "discharge_summary",
+            "confidence": 0.92,
+            "bounding_box": null
+          }
+        ]
+      },
+      {
+        "rule_id": "R002",
+        "rule_name": "Pre-authorization form present",
+        "result": "FAIL-CRITICAL",
+        "message": "Pre-authorization form is mandatory.",
+        "confidence": 1.0,
+        "evidence": []
+      },
+      {
+        "rule_id": "R003",
+        "rule_name": "Operative notes present",
+        "result": "PASS",
+        "message": "operative_notes found.",
+        "confidence": 0.92,
+        "evidence": [
+          {
+            "doc_id": "000525__CMJAY_TR_CMJAY_2025_R3_1021740400__OT_NOTE",
+            "page": 1,
+            "field": "document_type",
+            "value": "operative_notes",
+            "confidence": 0.92,
+            "bounding_box": null
+          }
+        ]
+      },
+      {
+        "rule_id": "R004",
+        "rule_name": "X-ray (pre-op) must be present",
+        "result": "PASS",
+        "message": "xray_image found.",
+        "confidence": 0.92,
+        "evidence": [
+          {
+            "doc_id": "000523__CMJAY_TR_CMJAY_2025_R3_1021740400__XRAY",
+            "page": 1,
+            "field": "document_type",
+            "value": "xray_image",
+            "confidence": 0.92,
+            "bounding_box": null
+          }
+        ]
+      },
+      {
+        "rule_id": "R005",
+        "rule_name": "Implant barcode sticker present",
+        "result": "PASS",
+        "message": "barcode_sticker found.",
+        "confidence": 0.92,
+        "evidence": [
+          {
+            "doc_id": "000526__CMJAY_TR_CMJAY_2025_R3_1021740400__BARCODE",
+            "page": 1,
+            "field": "document_type",
+            "value": "barcode_sticker",
+            "confidence": 0.92,
+            "bounding_box": null
+          }
+        ]
+      },
+      {
+        "rule_id": "R006",
+        "rule_name": "Anaesthesia notes present",
+        "result": "FAIL-MAJOR",
+        "message": "Anaesthesia record must be submitted for surgical claims.",
+        "confidence": 1.0,
+        "evidence": []
+      },
+      {
+        "rule_id": "R007",
+        "rule_name": "Pre-operative investigations present",
+        "result": "FAIL-MAJOR",
+        "message": "Pre-op labs (CBC, BT/CT, RFT, ECG) must be submitted.",
+        "confidence": 1.0,
+        "evidence": []
+      },
+      {
+        "rule_id": "R008",
+        "rule_name": "Admission before discharge",
+        "result": "FAIL-CRITICAL",
+        "message": "Cannot verify: admission or discharge date missing.",
+        "confidence": 0.5,
+        "evidence": []
+      },
+      {
+        "rule_id": "R009",
+        "rule_name": "Procedure within admission\u2013discharge window",
+        "result": "FAIL-CRITICAL",
+        "message": "Procedure date not found in documents.",
+        "confidence": 0.4,
+        "evidence": []
+      },
+      {
+        "rule_id": "R010",
+        "rule_name": "Length of stay 5\u201314 days",
+        "result": "FAIL-MAJOR",
+        "message": "Length of stay cannot be computed (dates missing).",
+        "confidence": 0.4,
+        "evidence": []
+      },
+      {
+        "rule_id": "R011",
+        "rule_name": "Hospital stamp on discharge summary",
+        "result": "PASS",
+        "message": "hospital_stamp detected.",
+        "confidence": 0.8,
+        "evidence": [
+          {
+            "doc_id": "000524__CMJAY_TR_CMJAY_2025_R3_1021740400__DIS",
+            "page": 2,
+            "field": "hospital_stamp",
+            "value": "detected",
+            "confidence": 0.8137,
+            "bounding_box": {
+              "page": 2,
+              "x0": 133.0,
+              "y0": 1858.0,
+              "x1": 377.0,
+              "y1": 1963.0
+            }
+          }
+        ]
+      },
+      {
+        "rule_id": "R012",
+        "rule_name": "Doctor/Surgeon signature on operative notes",
+        "result": "PASS",
+        "message": "doctor_signature detected.",
+        "confidence": 0.8,
+        "evidence": [
+          {
+            "doc_id": "000522__CMJAY_TR_CMJAY_2025_R3_1021740400__INITIAL_ASSESSMENT",
+            "page": 1,
+            "field": "doctor_signature",
+            "value": "detected",
+            "confidence": 0.7868,
+            "bounding_box": {
+              "page": 1,
+              "x0": 1336.0,
+              "y0": 2241.0,
+              "x1": 1554.0,
+              "y1": 2279.0
+            }
+          }
+        ]
+      },
+      {
+        "rule_id": "R013",
+        "rule_name": "Diagnosis consistent with joint disease",
+        "result": "PASS",
+        "message": "Diagnosis keyword match: ['osteoarthritis', 'arthroplasty', 'oa knee'].",
+        "confidence": 0.75,
+        "evidence": [
+          {
+            "doc_id": "000524__CMJAY_TR_CMJAY_2025_R3_1021740400__DIS",
+            "page": 1,
+            "field": "diagnosis",
+            "value": "- Left OA knee",
+            "confidence": 0.72,
+            "bounding_box": null
+          }
+        ]
+      },
+      {
+        "rule_id": "R014",
+        "rule_name": "Implant details documented",
+        "result": "FAIL-MAJOR",
+        "message": "Operative notes must document implant components used.",
+        "confidence": 0.65,
+        "evidence": []
+      }
+    ]
+  },
+  "document_classification": [
+    {
+      "doc_id": "000522__CMJAY_TR_CMJAY_2025_R3_1021740400__INITIAL_ASSESSMENT",
+      "predicted_type": "admission_form",
+      "confidence": 0.92,
+      "signal": "filename",
+      "raw_label": "INITIAL_ASSESSMENT",
+      "source_path": "extract_1\\Claims\\SB039A\\CMJAY_TR_CMJAY_2025_R3_1021740400\\000522__CMJAY_TR_CMJAY_2025_R3_1021740400__INITIAL_ASSESSMENT.pdf"
+    },
+    {
+      "doc_id": "000523__CMJAY_TR_CMJAY_2025_R3_1021740400__XRAY",
+      "predicted_type": "xray_image",
+      "confidence": 0.92,
+      "signal": "filename",
+      "raw_label": "XRAY",
+      "source_path": "extract_1\\Claims\\SB039A\\CMJAY_TR_CMJAY_2025_R3_1021740400\\000523__CMJAY_TR_CMJAY_2025_R3_1021740400__XRAY.jpeg"
+    },
+    {
+      "doc_id": "000524__CMJAY_TR_CMJAY_2025_R3_1021740400__DIS",
+      "predicted_type": "discharge_summary",
+      "confidence": 0.92,
+      "signal": "filename",
+      "raw_label": "DIS",
+      "source_path": "extract_1\\Claims\\SB039A\\CMJAY_TR_CMJAY_2025_R3_1021740400\\000524__CMJAY_TR_CMJAY_2025_R3_1021740400__DIS.pdf"
+    },
+    {
+      "doc_id": "000525__CMJAY_TR_CMJAY_2025_R3_1021740400__OT_NOTE",
+      "predicted_type": "operative_notes",
+      "confidence": 0.92,
+      "signal": "filename",
+      "raw_label": "OT_NOTE",
+      "source_path": "extract_1\\Claims\\SB039A\\CMJAY_TR_CMJAY_2025_R3_1021740400\\000525__CMJAY_TR_CMJAY_2025_R3_1021740400__OT_NOTE.pdf"
+    },
+    {
+      "doc_id": "000526__CMJAY_TR_CMJAY_2025_R3_1021740400__BARCODE",
+      "predicted_type": "barcode_sticker",
+      "confidence": 0.92,
+      "signal": "filename",
+      "raw_label": "BARCODE",
+      "source_path": "extract_1\\Claims\\SB039A\\CMJAY_TR_CMJAY_2025_R3_1021740400\\000526__CMJAY_TR_CMJAY_2025_R3_1021740400__BARCODE.jpg"
+    },
+    {
+      "doc_id": "000527__CMJAY_TR_CMJAY_2025_R3_1021740400__POST_XRAY",
+      "predicted_type": "xray_image",
+      "confidence": 0.92,
+      "signal": "filename",
+      "raw_label": "POST_XRAY",
+      "source_path": "extract_1\\Claims\\SB039A\\CMJAY_TR_CMJAY_2025_R3_1021740400\\000527__CMJAY_TR_CMJAY_2025_R3_1021740400__POST_XRAY.jpeg"
+    },
+    {
+      "doc_id": "000529__CMJAY_TR_CMJAY_2025_R3_1021740400__INITIAL_ASSESSMENT",
+      "predicted_type": "admission_form",
+      "confidence": 0.92,
+      "signal": "filename",
+      "raw_label": "INITIAL_ASSESSMENT",
+      "source_path": "extract_1\\Claims\\SB039A\\CMJAY_TR_CMJAY_2025_R3_1021740400\\000529__CMJAY_TR_CMJAY_2025_R3_1021740400__INITIAL_ASSESSMENT.pdf"
+    },
+    {
+      "doc_id": "000530__CMJAY_TR_CMJAY_2025_R3_1021740400__DIS",
+      "predicted_type": "discharge_summary",
+      "confidence": 0.92,
+      "signal": "filename",
+      "raw_label": "DIS",
+      "source_path": "extract_1\\Claims\\SB039A\\CMJAY_TR_CMJAY_2025_R3_1021740400\\000530__CMJAY_TR_CMJAY_2025_R3_1021740400__DIS.pdf"
+    },
+    {
+      "doc_id": "000532__CMJAY_TR_CMJAY_2025_R3_1021740400__FEEDBACK",
+      "predicted_type": "feedback_form",
+      "confidence": 0.92,
+      "signal": "filename",
+      "raw_label": "FEEDBACK",
+      "source_path": "extract_1\\Claims\\SB039A\\CMJAY_TR_CMJAY_2025_R3_1021740400\\000532__CMJAY_TR_CMJAY_2025_R3_1021740400__FEEDBACK.jpeg"
+    }
+  ],
+  "extra_documents_flagged": [],
+  "visual_elements": [
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.7868421052631579,
+      "doc_id": "000522__CMJAY_TR_CMJAY_2025_R3_1021740400__INITIAL_ASSESSMENT",
+      "page": 1,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.8306451612903226,
+      "doc_id": "000522__CMJAY_TR_CMJAY_2025_R3_1021740400__INITIAL_ASSESSMENT",
+      "page": 2,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.6775109170305678,
+      "doc_id": "000523__CMJAY_TR_CMJAY_2025_R3_1021740400__XRAY",
+      "page": 1,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.6952380952380952,
+      "doc_id": "000524__CMJAY_TR_CMJAY_2025_R3_1021740400__DIS",
+      "page": 1,
+      "decoded_value": null
+    },
+    {
+      "type": "hospital_stamp",
+      "detected": true,
+      "confidence": 0.8137488212393468,
+      "doc_id": "000524__CMJAY_TR_CMJAY_2025_R3_1021740400__DIS",
+      "page": 2,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.7131578947368421,
+      "doc_id": "000524__CMJAY_TR_CMJAY_2025_R3_1021740400__DIS",
+      "page": 2,
+      "decoded_value": null
+    },
+    {
+      "type": "hospital_stamp",
+      "detected": true,
+      "confidence": 0.833970885434709,
+      "doc_id": "000525__CMJAY_TR_CMJAY_2025_R3_1021740400__OT_NOTE",
+      "page": 1,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.7263157894736842,
+      "doc_id": "000525__CMJAY_TR_CMJAY_2025_R3_1021740400__OT_NOTE",
+      "page": 1,
+      "decoded_value": null
+    },
+    {
+      "type": "hospital_stamp",
+      "detected": true,
+      "confidence": 0.8271472217503621,
+      "doc_id": "000525__CMJAY_TR_CMJAY_2025_R3_1021740400__OT_NOTE",
+      "page": 2,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.7125,
+      "doc_id": "000525__CMJAY_TR_CMJAY_2025_R3_1021740400__OT_NOTE",
+      "page": 2,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.6662751677852349,
+      "doc_id": "000526__CMJAY_TR_CMJAY_2025_R3_1021740400__BARCODE",
+      "page": 1,
+      "decoded_value": null
+    },
+    {
+      "type": "barcode",
+      "detected": true,
+      "confidence": 0.9,
+      "doc_id": "000526__CMJAY_TR_CMJAY_2025_R3_1021740400__BARCODE",
+      "page": 1,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.628125,
+      "doc_id": "000527__CMJAY_TR_CMJAY_2025_R3_1021740400__POST_XRAY",
+      "page": 1,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.7868421052631579,
+      "doc_id": "000529__CMJAY_TR_CMJAY_2025_R3_1021740400__INITIAL_ASSESSMENT",
+      "page": 1,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.8306451612903226,
+      "doc_id": "000529__CMJAY_TR_CMJAY_2025_R3_1021740400__INITIAL_ASSESSMENT",
+      "page": 2,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.85,
+      "doc_id": "000530__CMJAY_TR_CMJAY_2025_R3_1021740400__DIS",
+      "page": 1,
+      "decoded_value": null
+    },
+    {
+      "type": "hospital_stamp",
+      "detected": true,
+      "confidence": 0.822372807327582,
+      "doc_id": "000530__CMJAY_TR_CMJAY_2025_R3_1021740400__DIS",
+      "page": 2,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.7131578947368421,
+      "doc_id": "000530__CMJAY_TR_CMJAY_2025_R3_1021740400__DIS",
+      "page": 2,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.6,
+      "doc_id": "000532__CMJAY_TR_CMJAY_2025_R3_1021740400__FEEDBACK",
+      "page": 1,
+      "decoded_value": null
+    }
+  ],
+  "episode_timeline": {
+    "claim_id": "CMJAY_TR_CMJAY_2025_R3_1021740400",
+    "is_plausible": true,
+    "plausibility_flags": [],
+    "events": [
+      {
+        "sequence": 1,
+        "event_type": "Admission",
+        "date": "2026-02-17",
+        "source_document": "000524__CMJAY_TR_CMJAY_2025_R3_1021740400__DIS",
+        "source_path": "extract_1\\Claims\\SB039A\\CMJAY_TR_CMJAY_2025_R3_1021740400\\000524__CMJAY_TR_CMJAY_2025_R3_1021740400__DIS.pdf",
+        "temporal_validity": "Valid",
+        "validity_reason": ""
+      },
+      {
+        "sequence": 2,
+        "event_type": "Diagnostic Investigation",
+        "date": null,
+        "source_document": "000523__CMJAY_TR_CMJAY_2025_R3_1021740400__XRAY",
+        "source_path": "extract_1\\Claims\\SB039A\\CMJAY_TR_CMJAY_2025_R3_1021740400\\000523__CMJAY_TR_CMJAY_2025_R3_1021740400__XRAY.jpeg",
+        "temporal_validity": "Unknown",
+        "validity_reason": "Date not extracted from document"
+      },
+      {
+        "sequence": 3,
+        "event_type": "Other",
+        "date": null,
+        "source_document": "000526__CMJAY_TR_CMJAY_2025_R3_1021740400__BARCODE",
+        "source_path": "extract_1\\Claims\\SB039A\\CMJAY_TR_CMJAY_2025_R3_1021740400\\000526__CMJAY_TR_CMJAY_2025_R3_1021740400__BARCODE.jpg",
+        "temporal_validity": "Unknown",
+        "validity_reason": "Date not extracted from document"
+      },
+      {
+        "sequence": 4,
+        "event_type": "Billing / Administrative",
+        "date": null,
+        "source_document": "000532__CMJAY_TR_CMJAY_2025_R3_1021740400__FEEDBACK",
+        "source_path": "extract_1\\Claims\\SB039A\\CMJAY_TR_CMJAY_2025_R3_1021740400\\000532__CMJAY_TR_CMJAY_2025_R3_1021740400__FEEDBACK.jpeg",
+        "temporal_validity": "Unknown",
+        "validity_reason": "Date not extracted from document"
+      }
+    ]
+  },
+  "provenance_log": [
+    {
+      "field": "admission_date",
+      "value": "2026-02-17",
+      "doc_id": "000524__CMJAY_TR_CMJAY_2025_R3_1021740400__DIS",
+      "page": 1,
+      "confidence": 0.82,
+      "source_path": "extract_1\\Claims\\SB039A\\CMJAY_TR_CMJAY_2025_R3_1021740400\\000524__CMJAY_TR_CMJAY_2025_R3_1021740400__DIS.pdf"
+    },
+    {
+      "field": "diagnosis",
+      "value": "- Left OA knee",
+      "doc_id": "000524__CMJAY_TR_CMJAY_2025_R3_1021740400__DIS",
+      "page": 1,
+      "confidence": 0.72,
+      "source_path": "extract_1\\Claims\\SB039A\\CMJAY_TR_CMJAY_2025_R3_1021740400\\000524__CMJAY_TR_CMJAY_2025_R3_1021740400__DIS.pdf"
+    },
+    {
+      "field": "diagnosis",
+      "value": "M17.12",
+      "doc_id": "000524__CMJAY_TR_CMJAY_2025_R3_1021740400__DIS",
+      "page": 1,
+      "confidence": 0.72,
+      "source_path": "extract_1\\Claims\\SB039A\\CMJAY_TR_CMJAY_2025_R3_1021740400\\000524__CMJAY_TR_CMJAY_2025_R3_1021740400__DIS.pdf"
+    },
+    {
+      "field": "diagnosis",
+      "value": "Osteoarthritis Knee",
+      "doc_id": "000524__CMJAY_TR_CMJAY_2025_R3_1021740400__DIS",
+      "page": 1,
+      "confidence": 0.65,
+      "source_path": "extract_1\\Claims\\SB039A\\CMJAY_TR_CMJAY_2025_R3_1021740400\\000524__CMJAY_TR_CMJAY_2025_R3_1021740400__DIS.pdf"
+    },
+    {
+      "field": "diagnosis",
+      "value": "Total Knee Arthroplasty",
+      "doc_id": "000524__CMJAY_TR_CMJAY_2025_R3_1021740400__DIS",
+      "page": 1,
+      "confidence": 0.65,
+      "source_path": "extract_1\\Claims\\SB039A\\CMJAY_TR_CMJAY_2025_R3_1021740400\\000524__CMJAY_TR_CMJAY_2025_R3_1021740400__DIS.pdf"
+    },
+    {
+      "field": "patient_id",
+      "value": "ILS7850769",
+      "doc_id": "000522__CMJAY_TR_CMJAY_2025_R3_1021740400__INITIAL_ASSESSMENT",
+      "page": 1,
+      "confidence": 0.85,
+      "source_path": "extract_1\\Claims\\SB039A\\CMJAY_TR_CMJAY_2025_R3_1021740400\\000522__CMJAY_TR_CMJAY_2025_R3_1021740400__INITIAL_ASSESSMENT.pdf"
+    },
+    {
+      "field": "diagnosis",
+      "value": "OA B/L KNEE",
+      "doc_id": "000522__CMJAY_TR_CMJAY_2025_R3_1021740400__INITIAL_ASSESSMENT",
+      "page": 1,
+      "confidence": 0.72,
+      "source_path": "extract_1\\Claims\\SB039A\\CMJAY_TR_CMJAY_2025_R3_1021740400\\000522__CMJAY_TR_CMJAY_2025_R3_1021740400__INITIAL_ASSESSMENT.pdf"
+    },
+    {
+      "field": "diagnosis",
+      "value": "Final Diagnosis :",
+      "doc_id": "000525__CMJAY_TR_CMJAY_2025_R3_1021740400__OT_NOTE",
+      "page": 1,
+      "confidence": 0.72,
+      "source_path": "extract_1\\Claims\\SB039A\\CMJAY_TR_CMJAY_2025_R3_1021740400\\000525__CMJAY_TR_CMJAY_2025_R3_1021740400__OT_NOTE.pdf"
+    },
+    {
+      "field": "patient_name",
+      "value": "Es AgelGender",
+      "doc_id": "000529__CMJAY_TR_CMJAY_2025_R3_1021740400__INITIAL_ASSESSMENT",
+      "page": 1,
+      "confidence": 0.8,
+      "source_path": "extract_1\\Claims\\SB039A\\CMJAY_TR_CMJAY_2025_R3_1021740400\\000529__CMJAY_TR_CMJAY_2025_R3_1021740400__INITIAL_ASSESSMENT.pdf"
+    }
+  ]
+}

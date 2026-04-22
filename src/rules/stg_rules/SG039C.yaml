@@ -1,0 +1,122 @@
+# STG Rules: SG039C – Laparoscopic Cholecystectomy / General Abdominal Surgery
+# NHA PMJAY Package | Surgical – General Surgery
+
+package_code: SG039C
+package_name: "Laparoscopic Cholecystectomy / Abdominal Surgery"
+specialty: "General Surgery"
+care_type: "Inpatient"
+min_los: 2
+max_los: 7
+
+required_documents:
+  - discharge_summary
+  - case_sheet
+  - operative_notes
+  - usg_report               # USG abdomen required for cholecystectomy
+  - identity_document
+  - preauthorization_form
+  - anesthesia_notes
+  - lab_investigation
+
+recommended_documents:
+  - clinical_notes
+  - xray_image
+  - medication_chart
+  - bill_invoice
+  - feedback_form
+  - consent_form
+
+not_required_documents:
+  - angiography_report
+  - procedure_report
+  - barcode_sticker
+  - ivp_report
+
+rules:
+  - id: R001
+    name: "Discharge summary present"
+    type: document_presence
+    required_doc: discharge_summary
+    severity: critical
+    message: "Discharge summary is mandatory."
+
+  - id: R002
+    name: "Pre-authorization form present"
+    type: document_presence
+    required_doc: preauthorization_form
+    severity: critical
+    message: "Pre-authorization form is mandatory."
+
+  - id: R003
+    name: "Operative notes present"
+    type: document_presence
+    required_doc: operative_notes
+    severity: critical
+    message: "Operative notes are mandatory for all surgical packages."
+
+  - id: R004
+    name: "USG abdomen report present"
+    type: document_presence
+    required_doc: usg_report
+    severity: critical
+    message: "USG abdomen is mandatory to confirm cholelithiasis / abdominal indication."
+
+  - id: R005
+    name: "Anaesthesia notes present"
+    type: document_presence
+    required_doc: anesthesia_notes
+    severity: major
+    message: "Anaesthesia record must be submitted."
+
+  - id: R006
+    name: "Pre-operative lab investigations present"
+    type: document_presence
+    required_doc: lab_investigation
+    severity: major
+    message: "Pre-op CBC, LFT, RFT, clotting profile must be submitted."
+
+  - id: R007
+    name: "Admission before discharge"
+    type: temporal
+    check: admission_before_discharge
+    severity: critical
+    message: "Admission date must precede discharge date."
+
+  - id: R008
+    name: "Operation date within admission window"
+    type: temporal
+    check: procedure_within_admission
+    severity: critical
+    message: "Surgery date must fall within admission–discharge window."
+
+  - id: R009
+    name: "Length of stay 2–7 days"
+    type: los
+    min_days: 2
+    max_days: 7
+    severity: major
+    message: "Lapsco cholecystectomy LoS < 2 days or > 7 days needs justification."
+
+  - id: R010
+    name: "Hospital stamp on discharge summary"
+    type: visual_element
+    required_on: discharge_summary
+    element: hospital_stamp
+    severity: major
+    message: "Hospital stamp required on discharge summary."
+
+  - id: R011
+    name: "Surgeon signature on operative notes"
+    type: visual_element
+    required_on: operative_notes
+    element: doctor_signature
+    severity: major
+    message: "Surgeon must sign operative notes."
+
+  - id: R012
+    name: "Diagnosis consistent with gallbladder / abdominal pathology"
+    type: diagnosis_keyword
+    keywords: ["cholelithiasis", "cholecystitis", "gallstone", "appendicitis",
+               "hernia", "cholecystectomy", "laparoscop", "gallbladder"]
+    severity: major
+    message: "Diagnosis must match the surgical package indication."

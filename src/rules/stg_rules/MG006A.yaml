@@ -1,0 +1,114 @@
+# STG Rules: MG006A – General Medical Management (Inpatient)
+# NHA PMJAY Package | Medical – General Medicine / Fever / Sepsis / Medical ICU
+
+package_code: MG006A
+package_name: "General Medical Management (Fever / Sepsis / Medical Conditions)"
+specialty: "General Medicine"
+care_type: "Inpatient"
+min_los: 2
+max_los: 14
+
+required_documents:
+  - discharge_summary
+  - case_sheet
+  - lab_investigation
+  - identity_document
+  - preauthorization_form
+
+recommended_documents:
+  - clinical_notes           # Daily doctor notes / progress records
+  - medication_chart         # Treatment/medication chart
+  - xray_image               # Chest X-ray if applicable
+  - feedback_form
+  - bill_invoice
+  - consent_form
+
+not_required_documents:
+  - angiography_report
+  - operative_notes
+  - barcode_sticker
+  - ivp_report
+  - usg_report
+
+rules:
+  - id: R001
+    name: "Discharge summary must be present"
+    type: document_presence
+    required_doc: discharge_summary
+    severity: critical
+    message: "Discharge summary is mandatory for all general medical inpatient claims."
+
+  - id: R002
+    name: "Pre-authorization form required"
+    type: document_presence
+    required_doc: preauthorization_form
+    severity: critical
+    message: "Pre-authorization/PMJAY eligibility form is mandatory."
+
+  - id: R003
+    name: "Case sheet / clinical record required"
+    type: document_presence
+    required_doc: case_sheet
+    severity: critical
+    message: "Case sheet documenting patient history, examination and daily progress is mandatory."
+
+  - id: R004
+    name: "Identity document required"
+    type: document_presence
+    required_doc: identity_document
+    severity: critical
+    message: "Beneficiary identity proof (Aadhar/PMJAY card) must be submitted."
+
+  - id: R005
+    name: "Laboratory investigations documented"
+    type: document_presence
+    required_doc: lab_investigation
+    severity: major
+    message: "Lab investigations (CBC, biochemistry) are required for medical management claims."
+
+  - id: R006
+    name: "Admission date must precede discharge date"
+    type: temporal
+    check: admission_before_discharge
+    severity: critical
+    message: "Admission date must be before or equal to discharge date."
+
+  - id: R007
+    name: "Minimum inpatient stay for medical management"
+    type: los
+    min_days: 2
+    max_days: 14
+    severity: major
+    message: "General medical management requires minimum 2-day inpatient stay."
+
+  - id: R008
+    name: "Hospital stamp on discharge summary"
+    type: visual_element
+    required_on: discharge_summary
+    element: hospital_stamp
+    severity: major
+    message: "Discharge summary must carry the hospital stamp."
+
+  - id: R009
+    name: "Doctor signature on discharge summary"
+    type: visual_element
+    required_on: discharge_summary
+    element: doctor_signature
+    severity: major
+    message: "Treating doctor's signature required on discharge summary."
+
+  - id: R010
+    name: "Billed amount must not exceed package ceiling"
+    type: financial
+    max_amount: 15000
+    severity: minor
+    message: "MG006A package ceiling applies. Excess requires documentary evidence."
+
+  - id: R011
+    name: "Diagnosis consistent with medical management indication"
+    type: diagnosis_keyword
+    keywords: ["fever", "sepsis", "infection", "pneumonia", "typhoid", "dengue",
+               "malaria", "asthma", "copd", "bronchitis", "gastroenteritis",
+               "diarrhoea", "anemia", "diabetes", "hypertension", "cellulitis"]
+    severity: major
+    message: "Diagnosis must be consistent with general medical management indication."

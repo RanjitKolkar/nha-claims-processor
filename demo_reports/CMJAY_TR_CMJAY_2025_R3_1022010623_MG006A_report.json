@@ -1,0 +1,334 @@
+{
+  "meta": {
+    "generated_at": "2026-04-22T18:34:57.569964",
+    "system": "Medical Claims Processor v1.0"
+  },
+  "claim": {
+    "claim_id": "CMJAY_TR_CMJAY_2025_R3_1022010623",
+    "package_code": "MG006A",
+    "patient_name": "x Ay\ne",
+    "patient_id": null,
+    "age": null,
+    "gender": "Female",
+    "hospital_name": "al Notes",
+    "doctor_name": "esesecsesee lee Occ csnece OPDIIPD snesvs",
+    "admission_date": null,
+    "discharge_date": null,
+    "procedure_date": null,
+    "length_of_stay_days": null,
+    "billed_amount": null,
+    "diagnosis": []
+  },
+  "decision": {
+    "claim_id": "CMJAY_TR_CMJAY_2025_R3_1022010623",
+    "package_code": "MG006A",
+    "verdict": "FAIL",
+    "overall_score": 0.1707,
+    "confidence": 0.7773,
+    "critical_failures": [
+      "[R001] Discharge summary is mandatory for all general medical inpatient claims.",
+      "[R002] Pre-authorization/PMJAY eligibility form is mandatory.",
+      "[R003] Case sheet documenting patient history, examination and daily progress is mandatory.",
+      "[R004] Beneficiary identity proof (Aadhar/PMJAY card) must be submitted.",
+      "[R006] Cannot verify: admission or discharge date missing."
+    ],
+    "major_failures": [
+      "[R005] Lab investigations (CBC, biochemistry) are required for medical management claims.",
+      "[R007] Length of stay cannot be computed (dates missing).",
+      "[R011] Diagnosis must be consistent with general medical management indication."
+    ],
+    "minor_failures": [],
+    "passed_rules": [
+      "[R008] Hospital stamp on discharge summary",
+      "[R009] Doctor signature on discharge summary",
+      "[R010] Billed amount must not exceed package ceiling"
+    ],
+    "rule_details": [
+      {
+        "rule_id": "R001",
+        "rule_name": "Discharge summary must be present",
+        "result": "FAIL-CRITICAL",
+        "message": "Discharge summary is mandatory for all general medical inpatient claims.",
+        "confidence": 1.0,
+        "evidence": []
+      },
+      {
+        "rule_id": "R002",
+        "rule_name": "Pre-authorization form required",
+        "result": "FAIL-CRITICAL",
+        "message": "Pre-authorization/PMJAY eligibility form is mandatory.",
+        "confidence": 1.0,
+        "evidence": []
+      },
+      {
+        "rule_id": "R003",
+        "rule_name": "Case sheet / clinical record required",
+        "result": "FAIL-CRITICAL",
+        "message": "Case sheet documenting patient history, examination and daily progress is mandatory.",
+        "confidence": 1.0,
+        "evidence": []
+      },
+      {
+        "rule_id": "R004",
+        "rule_name": "Identity document required",
+        "result": "FAIL-CRITICAL",
+        "message": "Beneficiary identity proof (Aadhar/PMJAY card) must be submitted.",
+        "confidence": 1.0,
+        "evidence": []
+      },
+      {
+        "rule_id": "R005",
+        "rule_name": "Laboratory investigations documented",
+        "result": "FAIL-MAJOR",
+        "message": "Lab investigations (CBC, biochemistry) are required for medical management claims.",
+        "confidence": 1.0,
+        "evidence": []
+      },
+      {
+        "rule_id": "R006",
+        "rule_name": "Admission date must precede discharge date",
+        "result": "FAIL-CRITICAL",
+        "message": "Cannot verify: admission or discharge date missing.",
+        "confidence": 0.5,
+        "evidence": []
+      },
+      {
+        "rule_id": "R007",
+        "rule_name": "Minimum inpatient stay for medical management",
+        "result": "FAIL-MAJOR",
+        "message": "Length of stay cannot be computed (dates missing).",
+        "confidence": 0.4,
+        "evidence": []
+      },
+      {
+        "rule_id": "R008",
+        "rule_name": "Hospital stamp on discharge summary",
+        "result": "PASS",
+        "message": "hospital_stamp detected.",
+        "confidence": 0.8,
+        "evidence": [
+          {
+            "doc_id": "000585__CMJAY_TR_CMJAY_2025_R3_1022010623__SUDHAN_DB",
+            "page": 4,
+            "field": "hospital_stamp",
+            "value": "detected",
+            "confidence": 0.8556,
+            "bounding_box": {
+              "page": 4,
+              "x0": 0.0,
+              "y0": 1169.0,
+              "x1": 51.0,
+              "y1": 1212.0
+            }
+          }
+        ]
+      },
+      {
+        "rule_id": "R009",
+        "rule_name": "Doctor signature on discharge summary",
+        "result": "PASS",
+        "message": "doctor_signature detected.",
+        "confidence": 0.8,
+        "evidence": [
+          {
+            "doc_id": "000585__CMJAY_TR_CMJAY_2025_R3_1022010623__SUDHAN_DB",
+            "page": 1,
+            "field": "doctor_signature",
+            "value": "detected",
+            "confidence": 0.85,
+            "bounding_box": {
+              "page": 1,
+              "x0": 638.0,
+              "y0": 2307.0,
+              "x1": 1654.0,
+              "y1": 2339.0
+            }
+          }
+        ]
+      },
+      {
+        "rule_id": "R010",
+        "rule_name": "Billed amount must not exceed package ceiling",
+        "result": "PASS",
+        "message": "Billed amount not found; cannot verify ceiling.",
+        "confidence": 0.4,
+        "evidence": []
+      },
+      {
+        "rule_id": "R011",
+        "rule_name": "Diagnosis consistent with medical management indication",
+        "result": "FAIL-MAJOR",
+        "message": "Diagnosis must be consistent with general medical management indication.",
+        "confidence": 0.65,
+        "evidence": []
+      }
+    ]
+  },
+  "document_classification": [
+    {
+      "doc_id": "000585__CMJAY_TR_CMJAY_2025_R3_1022010623__SUDHAN_DB",
+      "predicted_type": "other",
+      "confidence": 0.4,
+      "signal": "fallback",
+      "raw_label": "SUDHAN_DB",
+      "source_path": "extract_1\\Claims\\MG006A\\CMJAY_TR_CMJAY_2025_R3_1022010623\\000585__CMJAY_TR_CMJAY_2025_R3_1022010623__SUDHAN_DB.pdf"
+    },
+    {
+      "doc_id": "000590__CMJAY_TR_CMJAY_2025_R3_1022010623__36acf382-6069-49c4-b705-a1c62a644a67",
+      "predicted_type": "admission_form",
+      "confidence": 0.6375,
+      "signal": "content",
+      "raw_label": "36ACF382-6069-49C4-B705-A1C62A644A67",
+      "source_path": "extract_1\\Claims\\MG006A\\CMJAY_TR_CMJAY_2025_R3_1022010623\\000590__CMJAY_TR_CMJAY_2025_R3_1022010623__36acf382-6069-49c4-b705-a1c62a644a67.jpg"
+    },
+    {
+      "doc_id": "000591__CMJAY_TR_CMJAY_2025_R3_1022010623__SUDAM",
+      "predicted_type": "admission_form",
+      "confidence": 0.6375,
+      "signal": "content",
+      "raw_label": "SUDAM",
+      "source_path": "extract_1\\Claims\\MG006A\\CMJAY_TR_CMJAY_2025_R3_1022010623\\000591__CMJAY_TR_CMJAY_2025_R3_1022010623__SUDAM.pdf"
+    }
+  ],
+  "extra_documents_flagged": [],
+  "visual_elements": [
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.85,
+      "doc_id": "000585__CMJAY_TR_CMJAY_2025_R3_1022010623__SUDHAN_DB",
+      "page": 1,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.6439759036144579,
+      "doc_id": "000585__CMJAY_TR_CMJAY_2025_R3_1022010623__SUDHAN_DB",
+      "page": 2,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.6434782608695653,
+      "doc_id": "000585__CMJAY_TR_CMJAY_2025_R3_1022010623__SUDHAN_DB",
+      "page": 3,
+      "decoded_value": null
+    },
+    {
+      "type": "hospital_stamp",
+      "detected": true,
+      "confidence": 0.8556424792353468,
+      "doc_id": "000585__CMJAY_TR_CMJAY_2025_R3_1022010623__SUDHAN_DB",
+      "page": 4,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.6035714285714286,
+      "doc_id": "000585__CMJAY_TR_CMJAY_2025_R3_1022010623__SUDHAN_DB",
+      "page": 4,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.6137351778656126,
+      "doc_id": "000590__CMJAY_TR_CMJAY_2025_R3_1022010623__36acf382-6069-49c4-b705-a1c62a644a67",
+      "page": 1,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.85,
+      "doc_id": "000591__CMJAY_TR_CMJAY_2025_R3_1022010623__SUDAM",
+      "page": 1,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.8056603773584906,
+      "doc_id": "000591__CMJAY_TR_CMJAY_2025_R3_1022010623__SUDAM",
+      "page": 2,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.85,
+      "doc_id": "000591__CMJAY_TR_CMJAY_2025_R3_1022010623__SUDAM",
+      "page": 3,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.7978873239436619,
+      "doc_id": "000591__CMJAY_TR_CMJAY_2025_R3_1022010623__SUDAM",
+      "page": 4,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.6637623762376238,
+      "doc_id": "000591__CMJAY_TR_CMJAY_2025_R3_1022010623__SUDAM",
+      "page": 5,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.665530303030303,
+      "doc_id": "000591__CMJAY_TR_CMJAY_2025_R3_1022010623__SUDAM",
+      "page": 6,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.85,
+      "doc_id": "000591__CMJAY_TR_CMJAY_2025_R3_1022010623__SUDAM",
+      "page": 7,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.7014492753623188,
+      "doc_id": "000591__CMJAY_TR_CMJAY_2025_R3_1022010623__SUDAM",
+      "page": 8,
+      "decoded_value": null
+    }
+  ],
+  "episode_timeline": {
+    "claim_id": "CMJAY_TR_CMJAY_2025_R3_1022010623",
+    "is_plausible": true,
+    "plausibility_flags": [],
+    "events": [
+      {
+        "sequence": 1,
+        "event_type": "Other",
+        "date": null,
+        "source_document": "000585__CMJAY_TR_CMJAY_2025_R3_1022010623__SUDHAN_DB",
+        "source_path": "extract_1\\Claims\\MG006A\\CMJAY_TR_CMJAY_2025_R3_1022010623\\000585__CMJAY_TR_CMJAY_2025_R3_1022010623__SUDHAN_DB.pdf",
+        "temporal_validity": "Unknown",
+        "validity_reason": "Date not extracted from document"
+      }
+    ]
+  },
+  "provenance_log": [
+    {
+      "field": "patient_name",
+      "value": "x Ay\ne",
+      "doc_id": "000585__CMJAY_TR_CMJAY_2025_R3_1022010623__SUDHAN_DB",
+      "page": 3,
+      "confidence": 0.8,
+      "source_path": "extract_1\\Claims\\MG006A\\CMJAY_TR_CMJAY_2025_R3_1022010623\\000585__CMJAY_TR_CMJAY_2025_R3_1022010623__SUDHAN_DB.pdf"
+    }
+  ]
+}

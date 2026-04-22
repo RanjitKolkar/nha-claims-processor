@@ -1,0 +1,510 @@
+{
+  "meta": {
+    "generated_at": "2026-04-22T17:51:05.036976",
+    "system": "Medical Claims Processor v1.0"
+  },
+  "claim": {
+    "claim_id": "BOCW_GJ_R3_2026040310046613_ER",
+    "package_code": "MC011A",
+    "patient_name": "Ec\nRAO",
+    "patient_id": null,
+    "age": null,
+    "gender": "Female",
+    "hospital_name": "al correlation",
+    "doctor_name": "eee P",
+    "admission_date": null,
+    "discharge_date": null,
+    "procedure_date": null,
+    "length_of_stay_days": null,
+    "billed_amount": null,
+    "diagnosis": [
+      "ACS: NSTEMI -",
+      "ST Elevation Myocardial Infarction",
+      "Non-ST Elevation Myocardial Infarction"
+    ]
+  },
+  "decision": {
+    "claim_id": "BOCW_GJ_R3_2026040310046613_ER",
+    "package_code": "MC011A",
+    "verdict": "FAIL",
+    "overall_score": 0.1628,
+    "confidence": 0.7455,
+    "critical_failures": [
+      "[R001] Discharge summary is mandatory.",
+      "[R002] Pre-authorization is mandatory.",
+      "[R003] Operative notes / surgical record is mandatory for cataract surgery.",
+      "[R004] IOL implant sticker with REF/lot number is mandatory.",
+      "[R005] Cannot verify: admission or discharge date missing.",
+      "[R009] Diagnosis must document cataract requiring surgical correction."
+    ],
+    "major_failures": [
+      "[R006] Length of stay cannot be computed (dates missing).",
+      "[R010] IOL type and power must be documented in operative notes."
+    ],
+    "minor_failures": [],
+    "passed_rules": [
+      "[R007] Hospital stamp on discharge summary",
+      "[R008] Surgeon signature on operative notes",
+      "[R011] Billed amount within cataract package ceiling"
+    ],
+    "rule_details": [
+      {
+        "rule_id": "R001",
+        "rule_name": "Discharge summary present",
+        "result": "FAIL-CRITICAL",
+        "message": "Discharge summary is mandatory.",
+        "confidence": 1.0,
+        "evidence": []
+      },
+      {
+        "rule_id": "R002",
+        "rule_name": "Pre-authorization form present",
+        "result": "FAIL-CRITICAL",
+        "message": "Pre-authorization is mandatory.",
+        "confidence": 1.0,
+        "evidence": []
+      },
+      {
+        "rule_id": "R003",
+        "rule_name": "Operative notes present",
+        "result": "FAIL-CRITICAL",
+        "message": "Operative notes / surgical record is mandatory for cataract surgery.",
+        "confidence": 1.0,
+        "evidence": []
+      },
+      {
+        "rule_id": "R004",
+        "rule_name": "IOL barcode sticker present",
+        "result": "FAIL-CRITICAL",
+        "message": "IOL implant sticker with REF/lot number is mandatory.",
+        "confidence": 1.0,
+        "evidence": []
+      },
+      {
+        "rule_id": "R005",
+        "rule_name": "Admission before discharge",
+        "result": "FAIL-CRITICAL",
+        "message": "Cannot verify: admission or discharge date missing.",
+        "confidence": 0.5,
+        "evidence": []
+      },
+      {
+        "rule_id": "R006",
+        "rule_name": "Length of stay 0\u20131 day (day-care)",
+        "result": "FAIL-MAJOR",
+        "message": "Length of stay cannot be computed (dates missing).",
+        "confidence": 0.4,
+        "evidence": []
+      },
+      {
+        "rule_id": "R007",
+        "rule_name": "Hospital stamp on discharge summary",
+        "result": "PASS",
+        "message": "hospital_stamp detected.",
+        "confidence": 0.8,
+        "evidence": [
+          {
+            "doc_id": "000009__BOCW_GJ_R3_2026040310046613__7a877f13-90de-4c5d-b2c8-c47d9bb0e2dd_compressed",
+            "page": 6,
+            "field": "hospital_stamp",
+            "value": "detected",
+            "confidence": 0.8215,
+            "bounding_box": {
+              "page": 6,
+              "x0": 1200.0,
+              "y0": 1885.0,
+              "x1": 1556.0,
+              "y1": 2070.0
+            }
+          }
+        ]
+      },
+      {
+        "rule_id": "R008",
+        "rule_name": "Surgeon signature on operative notes",
+        "result": "PASS",
+        "message": "doctor_signature detected.",
+        "confidence": 0.8,
+        "evidence": [
+          {
+            "doc_id": "000009__BOCW_GJ_R3_2026040310046613__7a877f13-90de-4c5d-b2c8-c47d9bb0e2dd_compressed",
+            "page": 1,
+            "field": "doctor_signature",
+            "value": "detected",
+            "confidence": 0.6554,
+            "bounding_box": {
+              "page": 1,
+              "x0": 1198.0,
+              "y0": 1653.0,
+              "x1": 1285.0,
+              "y1": 1681.0
+            }
+          }
+        ]
+      },
+      {
+        "rule_id": "R009",
+        "rule_name": "Diagnosis should indicate cataract",
+        "result": "FAIL-CRITICAL",
+        "message": "Diagnosis must document cataract requiring surgical correction.",
+        "confidence": 0.65,
+        "evidence": []
+      },
+      {
+        "rule_id": "R010",
+        "rule_name": "IOL details documented",
+        "result": "FAIL-MAJOR",
+        "message": "IOL type and power must be documented in operative notes.",
+        "confidence": 0.65,
+        "evidence": []
+      },
+      {
+        "rule_id": "R011",
+        "rule_name": "Billed amount within cataract package ceiling",
+        "result": "PASS",
+        "message": "Billed amount not found; cannot verify ceiling.",
+        "confidence": 0.4,
+        "evidence": []
+      }
+    ]
+  },
+  "document_classification": [
+    {
+      "doc_id": "000009__BOCW_GJ_R3_2026040310046613__7a877f13-90de-4c5d-b2c8-c47d9bb0e2dd_compressed",
+      "predicted_type": "xray_image",
+      "confidence": 0.6375,
+      "signal": "content",
+      "raw_label": "7A877F13-90DE-4C5D-B2C8-C47D9BB0E2DD_COMPRESSED",
+      "source_path": "extract_2\\Claims\\MC011A\\BOCW_GJ_R3_2026040310046613_ER\\000009__BOCW_GJ_R3_2026040310046613__7a877f13-90de-4c5d-b2c8-c47d9bb0e2dd_compressed.pdf"
+    },
+    {
+      "doc_id": "000012__BOCW_GJ_R3_2026040310046613__4d079c0c-a8a0-417e-87aa-6f277f84fa5a",
+      "predicted_type": "other",
+      "confidence": 0.4,
+      "signal": "fallback",
+      "raw_label": "4D079C0C-A8A0-417E-87AA-6F277F84FA5A",
+      "source_path": "extract_2\\Claims\\MC011A\\BOCW_GJ_R3_2026040310046613_ER\\000012__BOCW_GJ_R3_2026040310046613__4d079c0c-a8a0-417e-87aa-6f277f84fa5a.jpg"
+    },
+    {
+      "doc_id": "000032__BOCW_GJ_R3_2026040310046613__1b2c9239-9dfc-4dd3-9d47-7e4ba5e6e498",
+      "predicted_type": "angiography_report",
+      "confidence": 0.6181818181818182,
+      "signal": "content",
+      "raw_label": "1B2C9239-9DFC-4DD3-9D47-7E4BA5E6E498",
+      "source_path": "extract_2\\Claims\\MC011A\\BOCW_GJ_R3_2026040310046613_ER\\000032__BOCW_GJ_R3_2026040310046613__1b2c9239-9dfc-4dd3-9d47-7e4ba5e6e498.jpg"
+    },
+    {
+      "doc_id": "000034__BOCW_GJ_R3_2026040310046613__6a9b3b4f-b9f3-4acc-a421-2ca8e45b37c6_compressed",
+      "predicted_type": "other",
+      "confidence": 0.4,
+      "signal": "fallback",
+      "raw_label": "6A9B3B4F-B9F3-4ACC-A421-2CA8E45B37C6_COMPRESSED",
+      "source_path": "extract_2\\Claims\\MC011A\\BOCW_GJ_R3_2026040310046613_ER\\000034__BOCW_GJ_R3_2026040310046613__6a9b3b4f-b9f3-4acc-a421-2ca8e45b37c6_compressed.pdf"
+    }
+  ],
+  "extra_documents_flagged": [
+    "000009__BOCW_GJ_R3_2026040310046613__7a877f13-90de-4c5d-b2c8-c47d9bb0e2dd_compressed",
+    "000032__BOCW_GJ_R3_2026040310046613__1b2c9239-9dfc-4dd3-9d47-7e4ba5e6e498"
+  ],
+  "visual_elements": [
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.6553571428571429,
+      "doc_id": "000009__BOCW_GJ_R3_2026040310046613__7a877f13-90de-4c5d-b2c8-c47d9bb0e2dd_compressed",
+      "page": 1,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.684,
+      "doc_id": "000009__BOCW_GJ_R3_2026040310046613__7a877f13-90de-4c5d-b2c8-c47d9bb0e2dd_compressed",
+      "page": 2,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.6809628008752735,
+      "doc_id": "000009__BOCW_GJ_R3_2026040310046613__7a877f13-90de-4c5d-b2c8-c47d9bb0e2dd_compressed",
+      "page": 3,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.6954545454545454,
+      "doc_id": "000009__BOCW_GJ_R3_2026040310046613__7a877f13-90de-4c5d-b2c8-c47d9bb0e2dd_compressed",
+      "page": 4,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.7052109181141439,
+      "doc_id": "000009__BOCW_GJ_R3_2026040310046613__7a877f13-90de-4c5d-b2c8-c47d9bb0e2dd_compressed",
+      "page": 5,
+      "decoded_value": null
+    },
+    {
+      "type": "hospital_stamp",
+      "detected": true,
+      "confidence": 0.8214816287684281,
+      "doc_id": "000009__BOCW_GJ_R3_2026040310046613__7a877f13-90de-4c5d-b2c8-c47d9bb0e2dd_compressed",
+      "page": 6,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.6150208623087622,
+      "doc_id": "000009__BOCW_GJ_R3_2026040310046613__7a877f13-90de-4c5d-b2c8-c47d9bb0e2dd_compressed",
+      "page": 6,
+      "decoded_value": null
+    },
+    {
+      "type": "hospital_stamp",
+      "detected": true,
+      "confidence": 0.7881906076375532,
+      "doc_id": "000009__BOCW_GJ_R3_2026040310046613__7a877f13-90de-4c5d-b2c8-c47d9bb0e2dd_compressed",
+      "page": 7,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.6945882352941176,
+      "doc_id": "000009__BOCW_GJ_R3_2026040310046613__7a877f13-90de-4c5d-b2c8-c47d9bb0e2dd_compressed",
+      "page": 7,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.6323943661971831,
+      "doc_id": "000009__BOCW_GJ_R3_2026040310046613__7a877f13-90de-4c5d-b2c8-c47d9bb0e2dd_compressed",
+      "page": 8,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.7397101449275363,
+      "doc_id": "000009__BOCW_GJ_R3_2026040310046613__7a877f13-90de-4c5d-b2c8-c47d9bb0e2dd_compressed",
+      "page": 9,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.85,
+      "doc_id": "000009__BOCW_GJ_R3_2026040310046613__7a877f13-90de-4c5d-b2c8-c47d9bb0e2dd_compressed",
+      "page": 10,
+      "decoded_value": null
+    },
+    {
+      "type": "hospital_stamp",
+      "detected": true,
+      "confidence": 0.8208192391098202,
+      "doc_id": "000009__BOCW_GJ_R3_2026040310046613__7a877f13-90de-4c5d-b2c8-c47d9bb0e2dd_compressed",
+      "page": 11,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.7483483483483484,
+      "doc_id": "000009__BOCW_GJ_R3_2026040310046613__7a877f13-90de-4c5d-b2c8-c47d9bb0e2dd_compressed",
+      "page": 11,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.644090909090909,
+      "doc_id": "000009__BOCW_GJ_R3_2026040310046613__7a877f13-90de-4c5d-b2c8-c47d9bb0e2dd_compressed",
+      "page": 12,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.7476047904191616,
+      "doc_id": "000009__BOCW_GJ_R3_2026040310046613__7a877f13-90de-4c5d-b2c8-c47d9bb0e2dd_compressed",
+      "page": 13,
+      "decoded_value": null
+    },
+    {
+      "type": "hospital_stamp",
+      "detected": true,
+      "confidence": 0.7314128089947741,
+      "doc_id": "000009__BOCW_GJ_R3_2026040310046613__7a877f13-90de-4c5d-b2c8-c47d9bb0e2dd_compressed",
+      "page": 14,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.8018248175182482,
+      "doc_id": "000009__BOCW_GJ_R3_2026040310046613__7a877f13-90de-4c5d-b2c8-c47d9bb0e2dd_compressed",
+      "page": 14,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.85,
+      "doc_id": "000009__BOCW_GJ_R3_2026040310046613__7a877f13-90de-4c5d-b2c8-c47d9bb0e2dd_compressed",
+      "page": 15,
+      "decoded_value": null
+    },
+    {
+      "type": "hospital_stamp",
+      "detected": true,
+      "confidence": 0.7381875847946276,
+      "doc_id": "000009__BOCW_GJ_R3_2026040310046613__7a877f13-90de-4c5d-b2c8-c47d9bb0e2dd_compressed",
+      "page": 16,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.6774678111587983,
+      "doc_id": "000009__BOCW_GJ_R3_2026040310046613__7a877f13-90de-4c5d-b2c8-c47d9bb0e2dd_compressed",
+      "page": 16,
+      "decoded_value": null
+    },
+    {
+      "type": "hospital_stamp",
+      "detected": true,
+      "confidence": 0.7349467699822817,
+      "doc_id": "000012__BOCW_GJ_R3_2026040310046613__4d079c0c-a8a0-417e-87aa-6f277f84fa5a",
+      "page": 1,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.7170731707317073,
+      "doc_id": "000012__BOCW_GJ_R3_2026040310046613__4d079c0c-a8a0-417e-87aa-6f277f84fa5a",
+      "page": 1,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.85,
+      "doc_id": "000032__BOCW_GJ_R3_2026040310046613__1b2c9239-9dfc-4dd3-9d47-7e4ba5e6e498",
+      "page": 1,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.6945882352941176,
+      "doc_id": "000034__BOCW_GJ_R3_2026040310046613__6a9b3b4f-b9f3-4acc-a421-2ca8e45b37c6_compressed",
+      "page": 1,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.7404069767441861,
+      "doc_id": "000034__BOCW_GJ_R3_2026040310046613__6a9b3b4f-b9f3-4acc-a421-2ca8e45b37c6_compressed",
+      "page": 2,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.7506060606060606,
+      "doc_id": "000034__BOCW_GJ_R3_2026040310046613__6a9b3b4f-b9f3-4acc-a421-2ca8e45b37c6_compressed",
+      "page": 3,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.7506060606060606,
+      "doc_id": "000034__BOCW_GJ_R3_2026040310046613__6a9b3b4f-b9f3-4acc-a421-2ca8e45b37c6_compressed",
+      "page": 4,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.6936768149882904,
+      "doc_id": "000034__BOCW_GJ_R3_2026040310046613__6a9b3b4f-b9f3-4acc-a421-2ca8e45b37c6_compressed",
+      "page": 5,
+      "decoded_value": null
+    },
+    {
+      "type": "doctor_signature",
+      "detected": true,
+      "confidence": 0.6435483870967742,
+      "doc_id": "000034__BOCW_GJ_R3_2026040310046613__6a9b3b4f-b9f3-4acc-a421-2ca8e45b37c6_compressed",
+      "page": 6,
+      "decoded_value": null
+    }
+  ],
+  "episode_timeline": {
+    "claim_id": "BOCW_GJ_R3_2026040310046613_ER",
+    "is_plausible": true,
+    "plausibility_flags": [],
+    "events": [
+      {
+        "sequence": 1,
+        "event_type": "Diagnostic Investigation",
+        "date": null,
+        "source_document": "000009__BOCW_GJ_R3_2026040310046613__7a877f13-90de-4c5d-b2c8-c47d9bb0e2dd_compressed",
+        "source_path": "extract_2\\Claims\\MC011A\\BOCW_GJ_R3_2026040310046613_ER\\000009__BOCW_GJ_R3_2026040310046613__7a877f13-90de-4c5d-b2c8-c47d9bb0e2dd_compressed.pdf",
+        "temporal_validity": "Unknown",
+        "validity_reason": "Date not extracted from document"
+      },
+      {
+        "sequence": 2,
+        "event_type": "Other",
+        "date": null,
+        "source_document": "000012__BOCW_GJ_R3_2026040310046613__4d079c0c-a8a0-417e-87aa-6f277f84fa5a",
+        "source_path": "extract_2\\Claims\\MC011A\\BOCW_GJ_R3_2026040310046613_ER\\000012__BOCW_GJ_R3_2026040310046613__4d079c0c-a8a0-417e-87aa-6f277f84fa5a.jpg",
+        "temporal_validity": "Unknown",
+        "validity_reason": "Date not extracted from document"
+      }
+    ]
+  },
+  "provenance_log": [
+    {
+      "field": "patient_name",
+      "value": "Ec\nRAO",
+      "doc_id": "000009__BOCW_GJ_R3_2026040310046613__7a877f13-90de-4c5d-b2c8-c47d9bb0e2dd_compressed",
+      "page": 13,
+      "confidence": 0.8,
+      "source_path": "extract_2\\Claims\\MC011A\\BOCW_GJ_R3_2026040310046613_ER\\000009__BOCW_GJ_R3_2026040310046613__7a877f13-90de-4c5d-b2c8-c47d9bb0e2dd_compressed.pdf"
+    },
+    {
+      "field": "diagnosis",
+      "value": "ACS: NSTEMI -",
+      "doc_id": "000032__BOCW_GJ_R3_2026040310046613__1b2c9239-9dfc-4dd3-9d47-7e4ba5e6e498",
+      "page": 1,
+      "confidence": 0.72,
+      "source_path": "extract_2\\Claims\\MC011A\\BOCW_GJ_R3_2026040310046613_ER\\000032__BOCW_GJ_R3_2026040310046613__1b2c9239-9dfc-4dd3-9d47-7e4ba5e6e498.jpg"
+    },
+    {
+      "field": "diagnosis",
+      "value": "ST Elevation Myocardial Infarction",
+      "doc_id": "000032__BOCW_GJ_R3_2026040310046613__1b2c9239-9dfc-4dd3-9d47-7e4ba5e6e498",
+      "page": 1,
+      "confidence": 0.65,
+      "source_path": "extract_2\\Claims\\MC011A\\BOCW_GJ_R3_2026040310046613_ER\\000032__BOCW_GJ_R3_2026040310046613__1b2c9239-9dfc-4dd3-9d47-7e4ba5e6e498.jpg"
+    },
+    {
+      "field": "diagnosis",
+      "value": "Non-ST Elevation Myocardial Infarction",
+      "doc_id": "000032__BOCW_GJ_R3_2026040310046613__1b2c9239-9dfc-4dd3-9d47-7e4ba5e6e498",
+      "page": 1,
+      "confidence": 0.65,
+      "source_path": "extract_2\\Claims\\MC011A\\BOCW_GJ_R3_2026040310046613_ER\\000032__BOCW_GJ_R3_2026040310046613__1b2c9239-9dfc-4dd3-9d47-7e4ba5e6e498.jpg"
+    }
+  ]
+}
