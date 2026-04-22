@@ -100,9 +100,12 @@ class DecisionEngine:
         # ── Confidence (average of individual rule confidences) ───────────────
         avg_conf = sum(r.confidence for r in rule_results) / len(rule_results)
 
-        # ── Any critical failure → automatic FAIL ────────────────────────────
+        # ── Any HIGH-CONFIDENCE critical failure → automatic FAIL ─────────────
+        # Low-confidence (< 0.70) critical failures (e.g. dates unreadable from
+        # landscape scans) are handled by weighted scoring only, not auto-FAIL.
         has_critical_fail = any(
-            not r.passed and r.severity == "critical" for r in rule_results
+            not r.passed and r.severity == "critical" and r.confidence >= 0.70
+            for r in rule_results
         )
 
         # ── Verdict ───────────────────────────────────────────────────────────

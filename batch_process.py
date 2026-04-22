@@ -6,9 +6,16 @@ from __future__ import annotations
 
 import argparse
 import csv
+import io
 import logging
 import sys
 from pathlib import Path
+
+# Force UTF-8 stdout so logging/prints don't crash on Windows cp1252
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+else:
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 
 from config import CLAIMS_ROOTS, OUTPUT_DIR
 from pipeline import ClaimProcessor
@@ -98,13 +105,13 @@ def run_batch(limit: int = 0, package_filter: str = None):
     failed = sum(1 for r in summary_rows if r["verdict"] == "FAIL")
     errors = sum(1 for r in summary_rows if r["verdict"] == "ERROR")
 
-    print(f"\n{'═'*55}")
+    print(f"\n{'='*55}")
     print(f"  BATCH COMPLETE: {total} claims processed")
-    print(f"  ✅ PASS       : {passed}")
-    print(f"  ⚠️  CONDITIONAL: {conditional}")
-    print(f"  ❌ FAIL       : {failed}")
-    print(f"  💥 ERROR      : {errors}")
-    print(f"{'═'*55}\n")
+    print(f"  [PASS]        : {passed}")
+    print(f"  [CONDITIONAL] : {conditional}")
+    print(f"  [FAIL]        : {failed}")
+    print(f"  [ERROR]       : {errors}")
+    print(f"{'='*55}\n")
 
     return summary_rows
 
