@@ -30,3 +30,26 @@ Thumbs.db
 # Env
 .env
 *.env
+
+# Logs and terminal output files
+*.log
+out.txt
+inspect_out.txt
+make_csvs_out*.txt
+test_out.txt
+status_check.txt
+
+# Temp / Office lock files
+~$*
+
+# API job workspace (transient uploads)
+_api_jobs/
+
+# LaTeX paper (keep local only)
+paper/
+
+# LaTeX build artifacts
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.synctex.gz
